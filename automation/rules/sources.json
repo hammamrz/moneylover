@@ -1,0 +1,576 @@
+{
+  "version": 2,
+  "_comment": "Pola pengenal email per penerbit. 'match.from' dicocokkan ke alamat pengirim, 'match.subject' ke subjek. 'fields' adalah daftar regex yang dicoba berurutan; grup 1 diambil sebagai nilai. Bila satu sumber baru belum ada di sini, pipeline tetap memakai blok 'generic' dan menandai transaksi sebagai needs_review.",
+  "sources": [
+    {
+      "id": "bni_wondr",
+      "label": "BNI",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "wondr@bni.co.id"
+        ],
+        "subject": [
+          "wondr"
+        ]
+      },
+      "channel_default": "transfer",
+      "fields": {
+        "amount": [
+          "\\|\\s*Nominal\\s*\\|\\s*Rp\\s*([\\d.,]+)",
+          "\\|\\s*Total\\s*\\|\\s*Rp\\s*([\\d.,]+)"
+        ],
+        "date": [
+          "\\|\\s*Tanggal\\s*\\|\\s*([^|\\n]+)"
+        ],
+        "time": [
+          "\\|\\s*Waktu\\s*\\|\\s*([\\d:]{5,8})"
+        ],
+        "merchant": [
+          "\\|\\s*Penerima\\s*\\|\\s*\\n\\|\\s*([^|\\n]+?)\\s*\\|",
+          "\\|\\s*Tujuan\\s*\\|\\s*\\n\\|\\s*([^|\\n]+?)\\s*\\|"
+        ],
+        "account": [
+          "\\|\\s*(TAPLUS[^|\\n]*?)\\s*\\|"
+        ],
+        "reference": [
+          "\\|\\s*Reference ID\\s*\\|\\s*([A-Za-z0-9]+)"
+        ],
+        "merchant_credit": [
+          "\\|\\s*Pengirim[#:]*\\s*\\|?\\s*([^|\\n]+)"
+        ]
+      },
+      "direction_rules": [
+        {
+          "priority": 99,
+          "direction": "credit",
+          "any": [
+            "dana masuk",
+            "uang masuk",
+            "kamu baru aja terima"
+          ]
+        },
+        {
+          "priority": 98,
+          "direction": "debit",
+          "any": [
+            "baru aja bayar",
+            "baru aja transfer",
+            "pembayaran pakai",
+            "transfer berhasil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bni_cc",
+      "label": "BNI Kartu Kredit",
+      "kind": "card",
+      "match": {
+        "from": [
+          "bnicreditcard@bni.co.id",
+          "billing@bni.co.id"
+        ],
+        "subject": []
+      },
+      "channel_default": "card",
+      "fields": {
+        "amount": [
+          "Nominal Transaksi\\s*:\\s*Rp\\s*([\\d.,]+)"
+        ],
+        "date": [
+          "Tanggal Transaksi\\s*:\\s*([\\d/]{8,10}(?:\\s+[\\d:]{5})?)"
+        ],
+        "merchant": [
+          "Nama Merchant\\s*:\\s*([^\\n]+)"
+        ]
+      },
+      "direction_rules": [
+        {
+          "priority": 99,
+          "direction": "debit",
+          "any": [
+            "notifikasi transaksi",
+            "terima kasih atas transaksi"
+          ]
+        }
+      ],
+      "ignore_subject": [
+        "e-billing"
+      ]
+    },
+    {
+      "id": "superbank",
+      "label": "Superbank",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "superbank.id",
+          "superbank.co.id"
+        ],
+        "subject": [
+          "superbank"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "jago",
+      "label": "Bank Jago",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "noreply@jago.com",
+          "jago.com",
+          "bankjago.com"
+        ],
+        "subject": [
+          "jago"
+        ]
+      },
+      "channel_default": "transfer",
+      "fields": {
+        "amount": [
+          "\\|\\s*Amount:?\\s*\\|\\s*Rp\\s*([\\d.,]+)"
+        ],
+        "date": [
+          "\\|\\s*Transaction Date:?\\s*\\|\\s*([^|\\n]+)"
+        ],
+        "merchant": [
+          "\\|\\s*To:?\\s*\\|\\s*([^|\\n]+)"
+        ],
+        "account": [
+          "\\|\\s*From:?\\s*\\|\\s*([^|\\n]+)"
+        ],
+        "merchant_credit": [
+          "\\|\\s*From:?\\s*\\|\\s*([^|\\n]+)"
+        ]
+      },
+      "direction_rules": [
+        {
+          "priority": 99,
+          "direction": "credit",
+          "any": [
+            "has received some money",
+            "have received some money",
+            "received some money",
+            "pocket has received"
+          ]
+        },
+        {
+          "priority": 98,
+          "direction": "debit",
+          "any": [
+            "have made a payment",
+            "made a payment to",
+            "have transferred",
+            "made a transfer",
+            "did a top up",
+            "done an e-wallet top up"
+          ]
+        }
+      ],
+      "ignore_subject": [
+        "pendapatmu penting",
+        "survey",
+        "promo",
+        "tips"
+      ]
+    },
+    {
+      "id": "bca",
+      "label": "BCA",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "bca.co.id",
+          "klikbca",
+          "@bca."
+        ],
+        "subject": [
+          "bca"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "mandiri",
+      "label": "Bank Mandiri",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "noreply.livin@bankmandiri.co.id",
+          "bankmandiri.co.id",
+          "livin.id"
+        ],
+        "subject": [
+          "livin",
+          "mandiri"
+        ]
+      },
+      "channel_default": "transfer",
+      "fields": {
+        "amount": [
+          "\\|\\s*Nominal(?:\\s+Transaksi)?\\s*\\|\\s*Rp\\s*([\\d.,]+)",
+          "\\|\\s*Jumlah Transfer\\s*\\|\\s*Rp\\s*([\\d.,]+)"
+        ],
+        "date": [
+          "\\|\\s*Tanggal\\s*\\|\\s*([^|\\n]+)"
+        ],
+        "time": [
+          "\\|\\s*Jam\\s*\\|\\s*([\\d:]{5,8})"
+        ],
+        "merchant": [
+          "\\|\\s*Penerima#+\\s*([^|\\n]+)"
+        ],
+        "account": [
+          "\\|\\s*Sumber Dana#+[^|\\n]*?(\\*{2,}\\d{3,4})"
+        ],
+        "reference": [
+          "\\|\\s*No\\.\\s*Referensi\\s*\\|\\s*(\\d+)"
+        ],
+        "merchant_credit": [
+          "\\|\\s*Pengirim[#:]*\\s*\\|?\\s*([^|\\n]+)"
+        ]
+      },
+      "direction_rules": [
+        {
+          "priority": 99,
+          "direction": "credit",
+          "any": [
+            "dana masuk",
+            "uang masuk",
+            "penerimaan dana"
+          ]
+        },
+        {
+          "priority": 98,
+          "direction": "debit",
+          "any": [
+            "pembayaran berhasil",
+            "transfer berhasil",
+            "pembelian berhasil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bri",
+      "label": "BRI",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "bri.co.id",
+          "brimo"
+        ],
+        "subject": [
+          "brimo",
+          "bri "
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "permata",
+      "label": "Permata Bank",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "permatabank.co.id",
+          "permatabank.com"
+        ],
+        "subject": [
+          "permata"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "cimb",
+      "label": "CIMB Niaga",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "cimbniaga.co.id",
+          "octo"
+        ],
+        "subject": [
+          "octo",
+          "cimb"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "btpn_jenius",
+      "label": "Jenius",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "jenius.com",
+          "btpn.com"
+        ],
+        "subject": [
+          "jenius"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "seabank",
+      "label": "SeaBank",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "seabank.co.id"
+        ],
+        "subject": [
+          "seabank"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "bsi",
+      "label": "Bank Syariah Indonesia",
+      "kind": "bank",
+      "match": {
+        "from": [
+          "bankbsi.co.id",
+          "bsi.co.id"
+        ],
+        "subject": [
+          "bsi"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "gopay",
+      "label": "GoPay",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "gojek.com",
+          "gopay.co.id"
+        ],
+        "subject": [
+          "gopay",
+          "gojek"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "ovo",
+      "label": "OVO",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "ovo.id"
+        ],
+        "subject": [
+          "ovo"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "dana",
+      "label": "DANA",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "dana.id"
+        ],
+        "subject": [
+          "dana wallet",
+          "dana -"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "shopeepay",
+      "label": "ShopeePay",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "shopee.co.id",
+          "shopeepay"
+        ],
+        "subject": [
+          "shopeepay",
+          "shopee"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "linkaja",
+      "label": "LinkAja",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "linkaja.id"
+        ],
+        "subject": [
+          "linkaja"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "flip",
+      "label": "Flip",
+      "kind": "ewallet",
+      "match": {
+        "from": [
+          "flip.id"
+        ],
+        "subject": [
+          "flip"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "tokopedia",
+      "label": "Tokopedia",
+      "kind": "merchant",
+      "match": {
+        "from": [
+          "tokopedia.com"
+        ],
+        "subject": [
+          "tokopedia"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "grab",
+      "label": "Grab",
+      "kind": "merchant",
+      "match": {
+        "from": [
+          "grab.com"
+        ],
+        "subject": [
+          "grab"
+        ]
+      },
+      "channel_default": "ewallet"
+    },
+    {
+      "id": "pln",
+      "label": "PLN",
+      "kind": "biller",
+      "match": {
+        "from": [
+          "pln.co.id"
+        ],
+        "subject": [
+          "pln",
+          "listrik"
+        ]
+      },
+      "channel_default": "transfer"
+    },
+    {
+      "id": "telkom",
+      "label": "Telkom / IndiHome",
+      "kind": "biller",
+      "match": {
+        "from": [
+          "telkom.co.id",
+          "indihome.co.id"
+        ],
+        "subject": [
+          "indihome",
+          "telkom"
+        ]
+      },
+      "channel_default": "transfer"
+    }
+  ],
+  "generic": {
+    "fields": {
+      "amount": [
+        "(?i)(?:nominal|jumlah|total\\s*(?:pembayaran|transaksi|tagihan|belanja)?|amount|sebesar|nilai\\s*transaksi|grand\\s*total)\\s*[:\\-]?\\s*(?:rp\\.?|idr)?\\s*([0-9][0-9.,]*)",
+        "(?i)\\b(?:rp\\.?|idr)\\s*([0-9][0-9.,]*)"
+      ],
+      "date": [
+        "(?i)(?:tanggal|tgl|waktu|date|time)\\s*(?:transaksi|pembayaran)?\\s*[:\\-]?\\s*([0-9]{1,2}[/\\-.][0-9]{1,2}[/\\-.][0-9]{2,4}(?:[ ,]+[0-9]{1,2}[:.][0-9]{2}(?:[:.][0-9]{2})?)?)",
+        "(?i)(?:tanggal|tgl|waktu|date)\\s*[:\\-]?\\s*([0-9]{1,2}\\s+[A-Za-z]{3,9}\\.?\\s+[0-9]{4}(?:[ ,]+[0-9]{1,2}[:.][0-9]{2}(?:[:.][0-9]{2})?)?)",
+        "(?i)\\b([0-9]{4}-[0-9]{2}-[0-9]{2}[T ][0-9]{2}:[0-9]{2}(?::[0-9]{2})?)"
+      ],
+      "merchant": [
+        "(?i)(?:merchant|penerima|tujuan|kepada|toko|nama\\s*toko|biller|ke\\s*rekening)\\s*[:\\-]\\s*([^\\n\\r]{2,60})",
+        "(?i)(?:pembayaran|pembelian|transaksi)\\s+(?:di|ke|pada)\\s+([^\\n\\r]{2,60})"
+      ],
+      "account": [
+        "(?i)(?:rekening|no\\.?\\s*rek(?:ening)?|kartu|card|sumber\\s*dana|debit\\s*dari|account)\\s*(?:sumber|asal|anda)?\\s*[:\\-]?\\s*([0-9xX*]{4,20})",
+        "(?i)\\b([0-9xX*]{2,}[*xX]{2,}[0-9]{4})\\b"
+      ],
+      "reference": [
+        "(?i)(?:no\\.?\\s*(?:ref(?:erensi)?|transaksi)|reference|trx\\s*id|transaction\\s*id|invoice)\\s*[:\\-]?\\s*([A-Za-z0-9\\-/]{4,40})"
+      ]
+    },
+    "direction_rules": [
+      {
+        "priority": 90,
+        "direction": "credit",
+        "any": [
+          "dana masuk",
+          "uang masuk",
+          "diterima",
+          "penerimaan",
+          "kredit sebesar",
+          "top up berhasil dari",
+          "refund",
+          "pengembalian dana",
+          "cashback",
+          "gaji",
+          "payroll",
+          "bagi hasil",
+          "bunga",
+          "dividen",
+          "incoming transfer",
+          "credited"
+        ]
+      },
+      {
+        "priority": 80,
+        "direction": "debit",
+        "any": [
+          "pembayaran",
+          "pembelian",
+          "transaksi berhasil",
+          "dana keluar",
+          "uang keluar",
+          "debet",
+          "didebet",
+          "penarikan",
+          "transfer ke",
+          "tagihan",
+          "biaya",
+          "berhasil dibayar",
+          "purchase",
+          "debited",
+          "withdrawal"
+        ]
+      }
+    ],
+    "transfer_hints": [
+      "transfer ke",
+      "transfer antar",
+      "pindah dana",
+      "top up",
+      "topup",
+      "isi saldo",
+      "overbooking",
+      "ke rekening sendiri"
+    ]
+  }
+}

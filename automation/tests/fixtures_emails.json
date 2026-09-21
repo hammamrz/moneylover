@@ -1,0 +1,52 @@
+[
+  {
+    "id": "msg-bca-qris",
+    "threadId": "thr-1",
+    "from": "noreply@bca.co.id",
+    "subject": "Notifikasi Transaksi BCA",
+    "date": "2026-09-18T14:35:00+07:00",
+    "body": "<p>Tanggal: 18/09/2026 14:32:05</p><p>Pembayaran QRIS</p><p>Merchant: GRAB* TRIP 8829102 JAKARTA</p><p>Nominal: Rp125.000,00</p><p>Rekening: 1234567890</p><p>No. Ref: TRX889123</p>"
+  },
+  {
+    "id": "msg-pln",
+    "from": "noreply@pln.co.id",
+    "subject": "Pembayaran Tagihan Listrik Berhasil",
+    "date": "2026-09-05T09:10:00+07:00",
+    "body": "Tanggal: 05/09/2026 09:05\nPembayaran tagihan listrik\nTotal pembayaran: Rp 452.300\nNo. Referensi: PLN20260905"
+  },
+  {
+    "id": "msg-tokopedia",
+    "from": "noreply@tokopedia.com",
+    "subject": "Pesanan kamu sudah dibayar",
+    "date": "2026-09-12T20:01:00+07:00",
+    "body": "Tanggal: 12 Sep 2026 19:58\nPembayaran pesanan di Tokopedia\nTotal belanja: Rp 349.000\nInvoice: INV/20260912/XX/123"
+  },
+  {
+    "id": "msg-gaji",
+    "from": "payroll@bankmandiri.co.id",
+    "subject": "Dana Masuk - Payroll",
+    "date": "2026-09-25T08:00:00+07:00",
+    "body": "Tanggal: 25/09/2026 07:55\nDana masuk gaji bulan September\nNominal: Rp 18.500.000\nRekening: 9876543210"
+  },
+  {
+    "id": "msg-topup-out",
+    "from": "noreply@bca.co.id",
+    "subject": "Transaksi Berhasil",
+    "date": "2026-09-14T11:00:00+07:00",
+    "body": "Tanggal: 14/09/2026 11:00\nTransfer ke GoPay\nNominal: Rp 200.000\nRekening: 1234567890"
+  },
+  {
+    "id": "msg-topup-in",
+    "from": "noreply@gopay.co.id",
+    "subject": "Saldo GoPay bertambah",
+    "date": "2026-09-14T11:02:00+07:00",
+    "body": "Tanggal: 14/09/2026 11:01\nDana masuk top up berhasil dari BCA\nNominal: Rp 200.000"
+  },
+  {
+    "id": "msg-newsletter",
+    "from": "news@linkedin.com",
+    "subject": "5 lowongan baru untuk kamu",
+    "date": "2026-09-15T07:00:00+07:00",
+    "body": "Lihat lowongan terbaru minggu ini."
+  }
+]

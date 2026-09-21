@@ -1,0 +1,72 @@
+[
+  {
+    "id": "jago-payment",
+    "from": "noreply@jago.com",
+    "subject": "You have made a payment to TPC&TB BINTARO X CH",
+    "date": "2026-09-20T13:29:32Z",
+    "body": "Jago Mail\n\nHello NAMA PENGGUNA,\n\nThank you for trusting Jago! You have made a payment, and here are the details:\n\n| Transaction Summary | | |\n| From | 100000000000 |\n| To | TPC&TB BINTARO X CH 9360002200000000000 |\n| Amount | Rp 281.435 |\n| Transaction Date | 20 September 2026, 20:29 WIB |\n| Transaction Status | Successful |\n| Acquirer Name | CIMB Niaga |\n| Merchant Location | TANGERANG |\n| Terminal ID | Q6270002 |\n| Tip Amount | Rp 0 |\n\nFunds have been sent."
+  },
+  {
+    "id": "jago-received",
+    "from": "noreply@jago.com",
+    "subject": "Yay! You've received some money",
+    "date": "2026-09-19T08:23:43Z",
+    "body": "Jago Mail\n\nHello NAMA PENGGUNA,\n\nYour Jago Pocket has received some money and here are the details:\n\n| Transaction Summary | | |\n| From | PENGIRIM CONTOH HSBC 100000000000 |\n| To | MA 100000000000 |\n| Amount | Rp 1.500.000 |\n| Transaction Date | 19 September 2026, 15:23 WIB |\n| Transaction Status | Successful |"
+  },
+  {
+    "id": "jago-survey",
+    "from": "info@jago.com",
+    "subject": "Pendapatmu penting buat Jago",
+    "date": "2026-09-21T07:45:30Z",
+    "body": "Isi di sini & dapatkan Rp20.000! Jago Halo, Jagoan. Terima kasih sudah menjadi bagian dari perjalanan Jago."
+  },
+  {
+    "id": "bni-wondr-qris",
+    "from": "wondr@bni.co.id",
+    "subject": "Transaksi berhasil!",
+    "date": "2026-09-19T07:20:13Z",
+    "body": "| |\n| Transaksi berhasil! |\n\n| Hai, NAMA PENGGUNA Terima kasih udah bertransaksi dengan wondr by BNI! Kamu baru aja bayar pakai QRIS dengan detail sebagai berikut: |\n\n| |\n| Penerima |\n| SARI INDAH JAKARTA MBL |\n| JAKARTA SELATAN, 12910, ID |\n\n| | |\n| Sumber dana |\n| NAMA PENGGUNA |\n| TAPLUS • ******000 |\n\n| |\n| Tanggal & waktu transaksi |\n| Tanggal | 19 Sep 2026 |\n| Waktu | 14:20:10 WIB |\n\n| |\n| Detail pembayaran |\n| Nominal | Rp213.400 |\n| Total | Rp213.400 |\n\n| |\n| Detail transaksi |\n| Jenis transaksi | QRIS |\n| Reference ID | 20260919141959000416 |\n| Kode RRN | c8e2c3ed87ba |"
+  },
+  {
+    "id": "bni-cc",
+    "from": "bnicreditcard@bni.co.id",
+    "subject": "Notifikasi Transaksi Kartu VISAXX0000 di merchant Grab",
+    "date": "2026-09-17T20:54:34Z",
+    "body": "Yth. Bapak/Ibu NAMA PENGGUNA,\n\nTerima kasih atas transaksi Bapak/Ibu.\n\nNama Merchant : Grab* A-9RLCNK9GWW4T\nNominal Transaksi : Rp 64.500\nTanggal Transaksi : 18/09/2026 03:54\nNomor Kartu Kredit BNI : VISAXX0000"
+  },
+  {
+    "id": "bni-ebilling",
+    "from": "billing@bni.co.id",
+    "subject": "e-Billing BNI Visa Platinum Credit Card Tanggal Cetak 20-09-2026",
+    "date": "2026-09-19T20:33:00Z",
+    "body": "Yang Terhormat Bapak/Ibu NAMA PENGGUNA. Terimakasih telah menggunakan Kartu Kredit BNI. Berikut ini adalah e-Billing Kartu Kredit Anda periode bulan September 2026. Total tagihan Rp 3.625.313"
+  },
+  {
+    "id": "mandiri-qr",
+    "from": "noreply.livin@bankmandiri.co.id",
+    "subject": "Pembayaran Berhasil!",
+    "date": "2026-09-20T01:16:09Z",
+    "body": "Livin' by Mandiri\n\n| ## Pembayaran Berhasil |\n| Halo NAMA PENGGUNA , Berikut adalah detail transaksi Anda dengan QR: |\n\n| |\n| Penerima#### BP PANGERAN ANTASARI Jakarta Selat - ID |\n\n| Tanggal | 20 Sep 2026 |\n| |\n| Jam | 08:16:05 WIB |\n| |\n| Nominal Transaksi | Rp 63.423,00 |\n| |\n| No. Referensi | 2609201122562217955 |\n| |\n| Pengakuisisi | Bank Mandiri |\n\n| Sumber Dana#### NAMA PENGGUNA ****0000 |"
+  },
+  {
+    "id": "mandiri-transfer",
+    "from": "noreply.livin@bankmandiri.co.id",
+    "subject": "Transfer Berhasil",
+    "date": "2026-09-17T13:38:21Z",
+    "body": "Livin' by Mandiri\n\n| ## Transfer Berhasil |\n| Halo NAMA PENGGUNA , Berikut adalah detail transaksi Anda: |\n\n| |\n| Penerima#### SURYANI Bank Mandiri - 1360000000000 |\n\n| Tanggal | 17 Sep 2026 |\n| |\n| Jam | 20:38:20 WIB |\n| |\n| Jumlah Transfer | Rp 100.000,00 |\n| |\n| No. Referensi | 2609170000000000000 |"
+  },
+  {
+    "id": "jago-topup",
+    "from": "noreply@jago.com",
+    "subject": "You have done an e-Wallet top up",
+    "date": "2026-09-21T04:48:56Z",
+    "body": "Jago Mail\n\nHello NAMA PENGGUNA,\n\nThank you for trusting Jago! You just did a top up, here are the details:\n\n| Transaction Summary | | |\n| From: | 100000000000 |\n| To: | 080000000000 |\n| Amount: | Rp200.000 |\n| Transaction Date | 21 September 2026 11:48 WIB |\n\nYou can view the transaction history in your Pocket Details inside the Jago app."
+  },
+  {
+    "id": "bni-virtual-account",
+    "from": "wondr@bni.co.id",
+    "subject": "Transaksi berhasil!",
+    "date": "2026-09-20T11:33:04Z",
+    "body": "| |\n| Transaksi berhasil! |\n\n| Hai, NAMA PENGGUNA Terima kasih sudah bertransaksi dengan wondr by BNI! Kamu baru aja melakukan pembayaran pakai Virtual Account dengan detail sebagai berikut: |\n\n| |\n| Tujuan |\n| Finpay-MyOrbitApp-FINNET_VA |\n| 8029260920183026 |\n\n| | |\n| Sumber dana |\n| NAMA PENGGUNA |\n| TAPLUS • ******000 |\n\n| |\n| Tanggal & waktu transaksi |\n| Tanggal | 20-Sep-2026 |\n| Waktu | 18:32 WIB |\n\n| |\n| Detail transaksi |\n| Nominal | Rp35.000 |\n| Biaya admin | Rp0 |\n| Total | Rp35.000 |\n\n| |\n| Lainnya |\n| Reference ID | 20260920063246000921 |"
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "timezone": "+07:00",
+  "currency": "IDR",
+  "gmail_query": "newer_than:3d -in:spam -in:trash (label:Trade OR from:(bca.co.id OR bankmandiri.co.id OR bri.co.id OR bni.co.id OR permatabank.co.id OR cimbniaga.co.id OR jenius.com OR seabank.co.id OR bankbsi.co.id OR gopay.co.id OR gojek.com OR ovo.id OR dana.id OR shopee.co.id OR linkaja.id OR flip.id OR tokopedia.com OR grab.com OR pln.co.id OR telkom.co.id OR indihome.co.id) OR subject:(transaksi OR pembayaran OR \"dana masuk\" OR \"dana keluar\" OR tagihan OR struk OR invoice))",
+  "_own_accounts_comment": "Daftar dompet milik sendiri. Dipakai untuk dua hal: mendeteksi transfer antar rekening sendiri (bukan pengeluaran), dan menentukan dompet Money Lover tujuan per transaksi. 'bank' harus sama persis dengan label penerbit di rules/sources.json, 'moneylover_wallet' sama persis dengan nama dompet di Money Lover. Isi 'last4' dengan empat digit terakhir nomor rekening; tanpa itu transfer antar rekening sendiri hanya terdeteksi lewat pemasangan debit-kredit. Jangan memakai nama bank sebagai alias, karena transfer ke orang lain di bank yang sama akan ikut terbaca sebagai transfer internal.",
+  "own_accounts": [
+    {
+      "id": "bni",
+      "label": "Rekening BNI IP",
+      "bank": "BNI",
+      "last4": "",
+      "aliases": [],
+      "moneylover_wallet": "Rekening BNI IP",
+      "cashflowplus_book_id": 1
+    },
+    {
+      "id": "mandiri",
+      "label": "Rekening Mandiri",
+      "bank": "Bank Mandiri",
+      "last4": "",
+      "aliases": [],
+      "moneylover_wallet": "Rekening Mandiri",
+      "cashflowplus_book_id": 1
+    },
+    {
+      "id": "jago",
+      "label": "Bank Jago",
+      "bank": "Bank Jago",
+      "last4": "",
+      "aliases": [],
+      "moneylover_wallet": "Bank Jago",
+      "cashflowplus_book_id": 1
+    },
+    {
+      "id": "superbank",
+      "label": "Superbank",
+      "bank": "Superbank",
+      "last4": "",
+      "aliases": [],
+      "moneylover_wallet": "Superbank",
+      "cashflowplus_book_id": 1
+    },
+    {
+      "id": "gopay",
+      "label": "Gopai",
+      "bank": "GoPay",
+      "last4": "",
+      "aliases": [],
+      "moneylover_wallet": "Gopai",
+      "cashflowplus_book_id": 1
+    }
+  ],
+  "_ignored_sources_comment": "Label penerbit di rules/sources.json yang sengaja tidak dicatat. Dipakai untuk rekening yang dompet Money Lover-nya dikeluarkan dari total, sehingga transaksinya tidak perlu masuk staging sama sekali. Berbeda dari penerbit yang tidak dikenal: yang tidak dikenal tetap ditahan di antrean review supaya ketahuan, sedangkan yang terdaftar di sini memang sudah diputuskan untuk diabaikan. Kosongkan daftar ini untuk kembali memantau semuanya.",
+  "ignored_sources": [
+    "BNI Kartu Kredit"
+  ],
+  "_thresholds_comment": "Transaksi dengan confidence di bawah auto_import_min_confidence tidak pernah dikirim otomatis; selalu masuk antrean review.",
+  "thresholds": {
+    "auto_import_min_confidence": 0.8,
+    "transfer_pair_window_minutes": 15,
+    "duplicate_window_minutes": 5,
+    "large_amount_review": 5000000
+  },
+  "_target_comment": "Tujuan akhir pencatatan. 'moneylover' memakai API tidak resmi web.moneylover.me dan butuh environment variable MONEYLOVER_JWT. 'staging' hanya menulis file di repo. 'cashflowplus' menghasilkan berkas impor untuk aplikasi My CashFlow+. Hanya transaksi berstatus 'ready' yang pernah dikirim otomatis; 'needs_review' selalu menunggu keputusan manusia.",
+  "target": "moneylover",
+  "moneylover": {
+    "base_url": "https://web.moneylover.me/api",
+    "default_wallet": "",
+    "category_map": {},
+    "_wallet_comment": "Dompet ditentukan per transaksi dari own_accounts[].moneylover_wallet berdasarkan penerbit emailnya. default_wallet hanya cadangan untuk transaksi yang penerbitnya tidak dikenali; biarkan kosong agar transaksi seperti itu tertahan di staging, bukan mendarat di dompet asal.",
+    "_category_map_comment": "Kosong berarti memakai nama pada field 'moneylover' di rules/categories.json. Isi di sini untuk menimpa satu pemetaan tanpa mengubah berkas aturan. Contoh paling berguna: email pemesanan tidak bisa membedakan perjalanan dinas dari liburan, jadi defaultnya pohon Vacation trip. Untuk memindahkannya ke Business trip, isi: {\"perjalanan\": \"Business trip\", \"hotel\": \"Hotel\", \"pesawat\": \"Flight\", \"kereta_jauh\": \"Trains\", \"bus_travel\": \"Bus/Travel\"}."
+  },
+  "_gmail_query_comment": "Query untuk run harian. Sengaja tidak hanya mengandalkan label Trade, karena Routine pelabelan Gmail berjalan mingguan sehingga email hari ini biasanya belum berlabel. Jendela 3 hari tumpang tindih antar-run; duplikat ditangani ledger.py."
+}

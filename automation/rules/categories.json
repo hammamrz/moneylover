@@ -1,0 +1,1599 @@
+{
+  "version": 8,
+  "_comment": "Aturan kategorisasi. Urutan prioritas: transfer internal > rule dengan priority tertinggi > fallback. Nama pada 'moneylover' mengikuti pohon kategori akun ini, termasuk sub-kategorinya, supaya transaksi mendarat di tempat yang tepat dan bukan hanya di kategori induk.",
+  "categories": {
+    "taksi_ojol": {
+      "label": "Taksi & Ojol",
+      "type": "expense",
+      "moneylover": "Taxi,Ojol",
+      "cashflowplus": "Transport",
+      "moneylover_parent": "Transportation"
+    },
+    "bbm": {
+      "label": "BBM",
+      "type": "expense",
+      "moneylover": "Petrol",
+      "cashflowplus": "Transport",
+      "moneylover_parent": "Transportation"
+    },
+    "parkir_tol": {
+      "label": "Parkir",
+      "type": "expense",
+      "moneylover": "Parking Fees",
+      "cashflowplus": "Transport",
+      "moneylover_parent": "Transportation"
+    },
+    "kendaraan": {
+      "label": "Perawatan Kendaraan",
+      "type": "expense",
+      "moneylover": "Vehicle Maintenance",
+      "cashflowplus": "Transport",
+      "moneylover_parent": "Transportation"
+    },
+    "transportasi": {
+      "label": "Transportasi",
+      "type": "expense",
+      "moneylover": "Transportation",
+      "cashflowplus": "Transport"
+    },
+    "listrik": {
+      "label": "Listrik",
+      "type": "expense",
+      "moneylover": "Electricity Bill",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "internet": {
+      "label": "Internet & TV",
+      "type": "expense",
+      "moneylover": "Internet Bill",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "telepon": {
+      "label": "Pulsa & Telepon",
+      "type": "expense",
+      "moneylover": "Phone Bill",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "air": {
+      "label": "Air",
+      "type": "expense",
+      "moneylover": "Water Bill",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "laundry": {
+      "label": "Laundry",
+      "type": "expense",
+      "moneylover": "Laundry",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "sewa": {
+      "label": "Sewa",
+      "type": "expense",
+      "moneylover": "Rentals",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Bills & Utilities"
+    },
+    "tagihan": {
+      "label": "Tagihan & Utilitas",
+      "type": "expense",
+      "moneylover": "Bills & Utilities",
+      "cashflowplus": "Housing & Utilities"
+    },
+    "groceries": {
+      "label": "Belanja Harian",
+      "type": "expense",
+      "moneylover": "Groceries",
+      "cashflowplus": "Shopping",
+      "moneylover_parent": "Shopping"
+    },
+    "elektronik": {
+      "label": "Elektronik",
+      "type": "expense",
+      "moneylover": "Electronics",
+      "cashflowplus": "Shopping",
+      "moneylover_parent": "Shopping"
+    },
+    "pakaian": {
+      "label": "Pakaian",
+      "type": "expense",
+      "moneylover": "Clothing",
+      "cashflowplus": "Shopping",
+      "moneylover_parent": "Shopping"
+    },
+    "perabot": {
+      "label": "Perabot Rumah",
+      "type": "expense",
+      "moneylover": "Houseware",
+      "cashflowplus": "Shopping",
+      "moneylover_parent": "Shopping"
+    },
+    "hobi": {
+      "label": "Hobi",
+      "type": "expense",
+      "moneylover": "Hobbies",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Shopping"
+    },
+    "belanja": {
+      "label": "Belanja",
+      "type": "expense",
+      "moneylover": "Shopping",
+      "cashflowplus": "Shopping"
+    },
+    "anak": {
+      "label": "Anak",
+      "type": "expense",
+      "moneylover": "Children & Babies",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Family"
+    },
+    "peliharaan": {
+      "label": "Hewan Peliharaan",
+      "type": "expense",
+      "moneylover": "Pets",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Family"
+    },
+    "rumah": {
+      "label": "Rumah & Renovasi",
+      "type": "expense",
+      "moneylover": "Home Improvement",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Family"
+    },
+    "jasa_rumah": {
+      "label": "Jasa Rumah Tangga",
+      "type": "expense",
+      "moneylover": "Home Services",
+      "cashflowplus": "Housing & Utilities",
+      "moneylover_parent": "Family"
+    },
+    "makan": {
+      "label": "Makan & Minum",
+      "type": "expense",
+      "moneylover": "F&B",
+      "cashflowplus": "Food & Dining"
+    },
+    "kesehatan": {
+      "label": "Kesehatan",
+      "type": "expense",
+      "moneylover": "Health & Fitness",
+      "cashflowplus": "Health"
+    },
+    "pendidikan": {
+      "label": "Pendidikan",
+      "type": "expense",
+      "moneylover": "Education",
+      "cashflowplus": "Education"
+    },
+    "hiburan": {
+      "label": "Hiburan",
+      "type": "expense",
+      "moneylover": "Entertainment",
+      "cashflowplus": "Entertainment"
+    },
+    "perjalanan": {
+      "label": "Perjalanan",
+      "type": "expense",
+      "moneylover": "Vacation trip",
+      "cashflowplus": "Travel"
+    },
+    "donasi": {
+      "label": "Donasi & Zakat",
+      "type": "expense",
+      "moneylover": "Charity",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Be good"
+    },
+    "biaya_admin": {
+      "label": "Biaya Admin & Bank",
+      "type": "expense",
+      "moneylover": "Fees & Charges",
+      "cashflowplus": "Other"
+    },
+    "pajak": {
+      "label": "Pajak & Retribusi",
+      "type": "expense",
+      "moneylover": "Fees & Charges",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Fees & Charges"
+    },
+    "investasi": {
+      "label": "Investasi",
+      "type": "expense",
+      "moneylover": "Investment",
+      "cashflowplus": "Other"
+    },
+    "asuransi": {
+      "label": "Asuransi",
+      "type": "expense",
+      "moneylover": "Insurances",
+      "cashflowplus": "Other"
+    },
+    "gaji": {
+      "label": "Gaji",
+      "type": "income",
+      "moneylover": "Salary",
+      "cashflowplus": "Salary",
+      "moneylover_parent": "Co. Office"
+    },
+    "bunga": {
+      "label": "Bunga & Bagi Hasil",
+      "type": "income",
+      "moneylover": "Interest",
+      "cashflowplus": "Investment",
+      "moneylover_parent": "Investments"
+    },
+    "dividen": {
+      "label": "Dividen",
+      "type": "income",
+      "moneylover": "Stock Dividends",
+      "cashflowplus": "Investment",
+      "moneylover_parent": "Investments"
+    },
+    "refund": {
+      "label": "Refund & Cashback",
+      "type": "income",
+      "moneylover": "Other Income",
+      "cashflowplus": "Other Income"
+    },
+    "pemasukan_lain": {
+      "label": "Pemasukan Lain",
+      "type": "income",
+      "moneylover": "Other Income",
+      "cashflowplus": "Other Income"
+    },
+    "transfer": {
+      "label": "Transfer Antar Rekening",
+      "type": "transfer",
+      "moneylover": "Antar Rekening",
+      "cashflowplus": "Other"
+    },
+    "lainnya": {
+      "label": "Lainnya",
+      "type": "expense",
+      "moneylover": "Other Expense",
+      "cashflowplus": "Other"
+    },
+    "kafe": {
+      "label": "Kafe & Kopi",
+      "type": "expense",
+      "moneylover": "Café",
+      "cashflowplus": "Food & Dining",
+      "moneylover_parent": "F&B"
+    },
+    "jajan": {
+      "label": "Jajan & Camilan",
+      "type": "expense",
+      "moneylover": "Jajan",
+      "cashflowplus": "Food & Dining",
+      "moneylover_parent": "F&B"
+    },
+    "emoney": {
+      "label": "Top Up E-Money",
+      "type": "expense",
+      "moneylover": "E-Money",
+      "cashflowplus": "Transport",
+      "moneylover_parent": "Transportation"
+    },
+    "dokter": {
+      "label": "Dokter & Rumah Sakit",
+      "type": "expense",
+      "moneylover": "Doctor",
+      "cashflowplus": "Health",
+      "moneylover_parent": "Health & Fitness"
+    },
+    "apotek": {
+      "label": "Apotek & Obat",
+      "type": "expense",
+      "moneylover": "Pharmacy",
+      "cashflowplus": "Health",
+      "moneylover_parent": "Health & Fitness"
+    },
+    "olahraga": {
+      "label": "Olahraga",
+      "type": "expense",
+      "moneylover": "Sports",
+      "cashflowplus": "Health",
+      "moneylover_parent": "Health & Fitness"
+    },
+    "perawatan_diri": {
+      "label": "Perawatan Diri",
+      "type": "expense",
+      "moneylover": "Personal Care",
+      "cashflowplus": "Personal Care",
+      "moneylover_parent": "Health & Fitness"
+    },
+    "buku": {
+      "label": "Buku",
+      "type": "expense",
+      "moneylover": "Books",
+      "cashflowplus": "Education",
+      "moneylover_parent": "Education"
+    },
+    "streaming": {
+      "label": "Layanan Streaming",
+      "type": "expense",
+      "moneylover": "Streaming Service",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Entertainment"
+    },
+    "langganan": {
+      "label": "Langganan Aplikasi",
+      "type": "expense",
+      "moneylover": "Subscription",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Entertainment"
+    },
+    "bioskop": {
+      "label": "Bioskop",
+      "type": "expense",
+      "moneylover": "Movies",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Entertainment"
+    },
+    "game": {
+      "label": "Game",
+      "type": "expense",
+      "moneylover": "Games",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Entertainment"
+    },
+    "konser": {
+      "label": "Konser",
+      "type": "expense",
+      "moneylover": "Concert",
+      "cashflowplus": "Entertainment",
+      "moneylover_parent": "Entertainment"
+    },
+    "emas": {
+      "label": "Emas",
+      "type": "expense",
+      "moneylover": "Golds",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "reksadana": {
+      "label": "Reksa Dana",
+      "type": "expense",
+      "moneylover": "Buy rd",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "saham": {
+      "label": "Saham",
+      "type": "expense",
+      "moneylover": "Buy Saham",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "obligasi": {
+      "label": "Obligasi & SBN",
+      "type": "expense",
+      "moneylover": "Buy Bonds",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "deposito": {
+      "label": "Deposito",
+      "type": "expense",
+      "moneylover": "Topup Deposito",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "fee_investasi": {
+      "label": "Fee Beli/Jual",
+      "type": "expense",
+      "moneylover": "Fee Beli/Jual",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Investment"
+    },
+    "hadiah": {
+      "label": "Hadiah",
+      "type": "expense",
+      "moneylover": "Gifts & Donations",
+      "cashflowplus": "Other",
+      "moneylover_parent": "Be good"
+    },
+    "hotel": {
+      "label": "Hotel",
+      "type": "expense",
+      "moneylover": "Hotel Holiday",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Vacation trip"
+    },
+    "pesawat": {
+      "label": "Tiket Pesawat",
+      "type": "expense",
+      "moneylover": "Flight Holiday",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Vacation trip"
+    },
+    "kereta_jauh": {
+      "label": "Tiket Kereta Antarkota",
+      "type": "expense",
+      "moneylover": "Train holiday",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Vacation trip"
+    },
+    "bus_travel": {
+      "label": "Bus & Travel",
+      "type": "expense",
+      "moneylover": "Bus/Travel Holiday",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Vacation trip"
+    },
+    "perjalanan_dinas": {
+      "label": "Perjalanan Dinas",
+      "type": "expense",
+      "moneylover": "Business trip",
+      "cashflowplus": "Travel"
+    },
+    "hotel_dinas": {
+      "label": "Hotel Dinas",
+      "type": "expense",
+      "moneylover": "Hotel",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Business trip"
+    },
+    "pesawat_dinas": {
+      "label": "Tiket Pesawat Dinas",
+      "type": "expense",
+      "moneylover": "Flight",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Business trip"
+    },
+    "kereta_dinas": {
+      "label": "Tiket Kereta Dinas",
+      "type": "expense",
+      "moneylover": "Trains",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Business trip"
+    },
+    "bus_dinas": {
+      "label": "Bus & Travel Dinas",
+      "type": "expense",
+      "moneylover": "Bus/Travel",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Business trip"
+    },
+    "makan_dinas": {
+      "label": "Makan Dinas",
+      "type": "expense",
+      "moneylover": "Meals Biz Trip",
+      "cashflowplus": "Food & Dining",
+      "moneylover_parent": "Business trip"
+    },
+    "kas_dinas": {
+      "label": "Kas Perjalanan Dinas",
+      "type": "expense",
+      "moneylover": "Cash on carry",
+      "cashflowplus": "Travel",
+      "moneylover_parent": "Business trip"
+    },
+    "bonus": {
+      "label": "Bonus & THR",
+      "type": "income",
+      "moneylover": "Bonus",
+      "cashflowplus": "Salary",
+      "moneylover_parent": "Co. Office"
+    },
+    "sppd": {
+      "label": "Pembayaran SPPD",
+      "type": "income",
+      "moneylover": "Pembayaran SPPD",
+      "cashflowplus": "Other Income",
+      "moneylover_parent": "Co. Office"
+    },
+    "kas_kecil": {
+      "label": "Kas Kecil",
+      "type": "income",
+      "moneylover": "Kas Kecil",
+      "cashflowplus": "Other Income",
+      "moneylover_parent": "Co. Office"
+    },
+    "shu": {
+      "label": "SHU Koperasi",
+      "type": "income",
+      "moneylover": "SHU",
+      "cashflowplus": "Other Income",
+      "moneylover_parent": "Co. Office"
+    },
+    "reimburse_kesehatan": {
+      "label": "Reimburse Kesehatan",
+      "type": "income",
+      "moneylover": "Reimburse Kesehatan",
+      "cashflowplus": "Other Income"
+    },
+    "cair_deposito": {
+      "label": "Pencairan Deposito",
+      "type": "income",
+      "moneylover": "Cairdeposito",
+      "cashflowplus": "Investment",
+      "moneylover_parent": "Investments"
+    },
+    "penjualan": {
+      "label": "Hasil Penjualan",
+      "type": "income",
+      "moneylover": "Selling",
+      "cashflowplus": "Business",
+      "moneylover_parent": "Selling"
+    },
+    "tidak_terkategori": {
+      "label": "Belum Terkategori",
+      "type": "expense",
+      "moneylover": "Uncategorized Expense",
+      "cashflowplus": "Other"
+    },
+    "tidak_terkategori_masuk": {
+      "label": "Pemasukan Belum Terkategori",
+      "type": "income",
+      "moneylover": "Uncategorized Income",
+      "cashflowplus": "Other Income"
+    }
+  },
+  "fallback": {
+    "expense": "tidak_terkategori",
+    "income": "tidak_terkategori_masuk",
+    "transfer": "transfer"
+  },
+  "rules": [
+    {
+      "id": "gaji",
+      "category": "gaji",
+      "priority": 96,
+      "direction": "credit",
+      "any": [
+        "gaji",
+        "payroll",
+        "salary",
+        "remunerasi",
+        "honorarium",
+        "take home pay"
+      ]
+    },
+    {
+      "id": "bonus",
+      "category": "bonus",
+      "priority": 95,
+      "direction": "credit",
+      "any": [
+        "bonus",
+        "thr",
+        "tunjangan hari raya",
+        "insentif",
+        "tantiem"
+      ]
+    },
+    {
+      "id": "sppd",
+      "category": "sppd",
+      "priority": 94,
+      "direction": "credit",
+      "any": [
+        "sppd",
+        "uang perjalanan dinas",
+        "uang harian dinas",
+        "perjalanan dinas"
+      ]
+    },
+    {
+      "id": "kas-kecil",
+      "category": "kas_kecil",
+      "priority": 93,
+      "direction": "credit",
+      "any": [
+        "kas kecil",
+        "petty cash",
+        "uang muka kerja"
+      ]
+    },
+    {
+      "id": "reimburse-kesehatan",
+      "category": "reimburse_kesehatan",
+      "priority": 93,
+      "direction": "credit",
+      "any": [
+        "reimburse kesehatan",
+        "klaim kesehatan",
+        "penggantian biaya medis",
+        "klaim rawat"
+      ]
+    },
+    {
+      "id": "shu",
+      "category": "shu",
+      "priority": 93,
+      "direction": "credit",
+      "any": [
+        "shu",
+        "sisa hasil usaha",
+        "koperasi"
+      ]
+    },
+    {
+      "id": "topup-ewallet",
+      "category": "transfer",
+      "priority": 93,
+      "direction": "debit",
+      "any": [
+        "e-wallet top up",
+        "ewallet top up",
+        "top up e-wallet",
+        "topup e-wallet",
+        "top up gopay",
+        "top up ovo",
+        "top up dana"
+      ]
+    },
+    {
+      "id": "biaya-admin",
+      "category": "biaya_admin",
+      "priority": 92,
+      "direction": "debit",
+      "any": [
+        "biaya admin",
+        "biaya administrasi",
+        "admin fee",
+        "biaya transfer",
+        "biaya bulanan",
+        "denda keterlambatan",
+        "materai",
+        "biaya layanan",
+        "service charge",
+        "annual fee",
+        "iuran tahunan kartu"
+      ]
+    },
+    {
+      "id": "cair-deposito",
+      "category": "cair_deposito",
+      "priority": 92,
+      "direction": "credit",
+      "any": [
+        "pencairan deposito",
+        "deposito jatuh tempo",
+        "cair deposito"
+      ]
+    },
+    {
+      "id": "dividen",
+      "category": "dividen",
+      "priority": 92,
+      "direction": "credit",
+      "any": [
+        "dividen",
+        "dividend",
+        "stock dividend"
+      ]
+    },
+    {
+      "id": "fee-investasi",
+      "category": "fee_investasi",
+      "priority": 91,
+      "direction": "debit",
+      "any": [
+        "fee beli",
+        "fee jual",
+        "biaya broker",
+        "komisi broker"
+      ]
+    },
+    {
+      "id": "bunga",
+      "category": "bunga",
+      "priority": 90,
+      "direction": "credit",
+      "any": [
+        "bunga",
+        "bagi hasil",
+        "interest",
+        "kupon obligasi",
+        "imbal hasil"
+      ]
+    },
+    {
+      "id": "deposito",
+      "category": "deposito",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "deposito",
+        "topup deposito"
+      ]
+    },
+    {
+      "id": "emas",
+      "category": "emas",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "pembelian emas",
+        "logam mulia",
+        "antam",
+        "pluang",
+        "treasury",
+        "emas digital"
+      ]
+    },
+    {
+      "id": "obligasi",
+      "category": "obligasi",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "sbn ritel",
+        "sukuk",
+        "obligasi",
+        "ori0",
+        "fr00",
+        "bonds"
+      ]
+    },
+    {
+      "id": "pajak",
+      "category": "pajak",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "pajak",
+        "e-billing",
+        "djp",
+        "pbb",
+        "samsat",
+        "stnk",
+        "bea"
+      ]
+    },
+    {
+      "id": "reksadana",
+      "category": "reksadana",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "bibit",
+        "bareksa",
+        "reksa dana",
+        "reksadana"
+      ]
+    },
+    {
+      "id": "saham",
+      "category": "saham",
+      "priority": 90,
+      "direction": "debit",
+      "any": [
+        "stockbit",
+        "ajaib",
+        "ipot",
+        "mirae",
+        "sekuritas",
+        "rdn",
+        "pembelian saham",
+        "buy saham"
+      ]
+    },
+    {
+      "id": "listrik",
+      "category": "listrik",
+      "priority": 88,
+      "direction": "debit",
+      "any": [
+        "pln",
+        "listrik",
+        "token listrik",
+        "prabayar listrik",
+        "pascabayar listrik"
+      ]
+    },
+    {
+      "id": "refund",
+      "category": "refund",
+      "priority": 88,
+      "direction": "credit",
+      "any": [
+        "refund",
+        "pengembalian dana",
+        "cashback",
+        "reimburse",
+        "pembatalan pesanan",
+        "dana kembali"
+      ]
+    },
+    {
+      "id": "internet-tv",
+      "category": "internet",
+      "priority": 87,
+      "direction": "debit",
+      "any": [
+        "indihome",
+        "telkom indonesia",
+        "first media",
+        "biznet",
+        "myrepublic",
+        "iconnet",
+        "oxygen.id",
+        "wifi",
+        "internet bulanan",
+        "tv kabel",
+        "myorbit",
+        "myorbitapp",
+        "orbit"
+      ]
+    },
+    {
+      "id": "penjualan",
+      "category": "penjualan",
+      "priority": 87,
+      "direction": "credit",
+      "any": [
+        "hasil penjualan",
+        "penjualan barang",
+        "garage sale",
+        "pembayaran pesanan"
+      ]
+    },
+    {
+      "id": "air",
+      "category": "air",
+      "priority": 86,
+      "direction": "debit",
+      "any": [
+        "pdam",
+        "pam jaya",
+        "palyja",
+        "aetra",
+        "air minum",
+        "tagihan air"
+      ]
+    },
+    {
+      "id": "pulsa-telepon",
+      "category": "telepon",
+      "priority": 86,
+      "direction": "debit",
+      "any": [
+        "telkomsel",
+        "by.u",
+        "indosat",
+        "im3",
+        "xl axiata",
+        "smartfren",
+        "tri indonesia",
+        "pulsa",
+        "paket data",
+        "kuota"
+      ]
+    },
+    {
+      "id": "investasi-umum",
+      "category": "investasi",
+      "priority": 85,
+      "direction": "debit",
+      "any": [
+        "investasi",
+        "portofolio"
+      ]
+    },
+    {
+      "id": "tagihan-lain",
+      "category": "tagihan",
+      "priority": 84,
+      "direction": "debit",
+      "any": [
+        "gas negara",
+        "pgn",
+        "iuran lingkungan",
+        "bpjs",
+        "asuransi kesehatan nasional",
+        "tagihan bulanan"
+      ]
+    },
+    {
+      "id": "asuransi",
+      "category": "asuransi",
+      "priority": 83,
+      "direction": "debit",
+      "any": [
+        "premi asuransi",
+        "prudential",
+        "allianz",
+        "manulife",
+        "axa",
+        "sequis",
+        "sinarmas msig",
+        "asuransi jiwa"
+      ]
+    },
+    {
+      "id": "taksi-ojol",
+      "category": "taksi_ojol",
+      "priority": 82,
+      "direction": "debit",
+      "any": [
+        "grab",
+        "gojek",
+        "gocar",
+        "goride",
+        "maxim",
+        "indrive",
+        "bluebird",
+        "blue bird",
+        "my bluebird",
+        "taksi",
+        "ojol",
+        "ojek"
+      ]
+    },
+    {
+      "id": "zakat-donasi",
+      "category": "donasi",
+      "priority": 82,
+      "direction": "debit",
+      "any": [
+        "zakat",
+        "infaq",
+        "infak",
+        "sedekah",
+        "donasi",
+        "kitabisa",
+        "dompet dhuafa",
+        "baznas",
+        "rumah zakat",
+        "qurban",
+        "wakaf"
+      ]
+    },
+    {
+      "id": "emoney",
+      "category": "emoney",
+      "priority": 81,
+      "direction": "debit",
+      "any": [
+        "e-toll",
+        "etoll",
+        "flazz",
+        "e-money",
+        "emoney",
+        "brizzi",
+        "tapcash",
+        "top up kartu",
+        "saldo tol"
+      ]
+    },
+    {
+      "id": "bbm",
+      "category": "bbm",
+      "priority": 80,
+      "direction": "debit",
+      "any": [
+        "pertamina",
+        "shell",
+        "spbu",
+        "vivo energi",
+        "bp akr",
+        "isi bensin",
+        "pertalite",
+        "pertamax",
+        "solar subsidi"
+      ]
+    },
+    {
+      "id": "parkir",
+      "category": "parkir_tol",
+      "priority": 80,
+      "direction": "debit",
+      "any": [
+        "parkir",
+        "secure parking",
+        "gerbang tol",
+        "parking"
+      ]
+    },
+    {
+      "id": "transportasi-umum",
+      "category": "transportasi",
+      "priority": 80,
+      "direction": "debit",
+      "any": [
+        "trans jakarta",
+        "transjakarta",
+        "mrt jakarta",
+        "lrt",
+        "krl",
+        "commuter line",
+        "angkutan umum"
+      ]
+    },
+    {
+      "id": "kendaraan",
+      "category": "kendaraan",
+      "priority": 79,
+      "direction": "debit",
+      "any": [
+        "servis mobil",
+        "service mobil",
+        "bengkel",
+        "ganti oli",
+        "ban mobil",
+        "auto2000",
+        "nawilis",
+        "planet ban",
+        "cuci mobil",
+        "tune up"
+      ]
+    },
+    {
+      "id": "groceries",
+      "category": "groceries",
+      "priority": 78,
+      "direction": "debit",
+      "any": [
+        "alfamart",
+        "indomaret",
+        "alfamidi",
+        "superindo",
+        "hypermart",
+        "transmart",
+        "carrefour",
+        "lotte mart",
+        "ranch market",
+        "grand lucky",
+        "sayurbox",
+        "tanihub",
+        "astro",
+        "segari",
+        "klik indomaret",
+        "hokky",
+        "sembako"
+      ]
+    },
+    {
+      "id": "elektronik",
+      "category": "elektronik",
+      "priority": 77,
+      "direction": "debit",
+      "any": [
+        "erafone",
+        "ibox",
+        "digimap",
+        "samsung store",
+        "electronic city",
+        "hartono elektronik",
+        "laptop",
+        "handphone"
+      ]
+    },
+    {
+      "id": "kafe",
+      "category": "kafe",
+      "priority": 77,
+      "direction": "debit",
+      "any": [
+        "cafe",
+        "kafe",
+        "coffee",
+        "kopi",
+        "starbucks",
+        "kopi kenangan",
+        "janji jiwa",
+        "fore",
+        "tomoro",
+        "chatime",
+        "mixue",
+        "haus",
+        "es teh",
+        "kedai kopi"
+      ]
+    },
+    {
+      "id": "jajan",
+      "category": "jajan",
+      "priority": 76,
+      "direction": "debit",
+      "any": [
+        "bakery",
+        "roti",
+        "donat",
+        "martabak",
+        "dessert",
+        "camilan",
+        "snack",
+        "es krim",
+        "ice cream",
+        "jajan",
+        "cake"
+      ]
+    },
+    {
+      "id": "pakaian",
+      "category": "pakaian",
+      "priority": 76,
+      "direction": "debit",
+      "any": [
+        "uniqlo",
+        "zara",
+        "h&m",
+        "matahari",
+        "zalora",
+        "baju",
+        "sepatu",
+        "footwear"
+      ]
+    },
+    {
+      "id": "perabot",
+      "category": "perabot",
+      "priority": 76,
+      "direction": "debit",
+      "any": [
+        "ikea",
+        "informa",
+        "ace hardware",
+        "perabot",
+        "peralatan rumah"
+      ]
+    },
+    {
+      "id": "apotek",
+      "category": "apotek",
+      "priority": 75,
+      "direction": "debit",
+      "any": [
+        "apotek",
+        "apotik",
+        "kimia farma",
+        "guardian",
+        "century",
+        "k24",
+        "obat"
+      ]
+    },
+    {
+      "id": "dokter",
+      "category": "dokter",
+      "priority": 75,
+      "direction": "debit",
+      "any": [
+        "rumah sakit",
+        "klinik",
+        "siloam",
+        "mitra keluarga",
+        "halodoc",
+        "alodokter",
+        "prodia",
+        "dokter",
+        "laboratorium klinik",
+        "medical check"
+      ]
+    },
+    {
+      "id": "makan",
+      "category": "makan",
+      "priority": 75,
+      "direction": "debit",
+      "any": [
+        "gofood",
+        "grabfood",
+        "shopeefood",
+        "restoran",
+        "resto",
+        "rumah makan",
+        "warung",
+        "mcdonald",
+        "kfc",
+        "burger king",
+        "pizza",
+        "hokben",
+        "yoshinoya",
+        "solaria",
+        "bakmi",
+        "sate",
+        "padang",
+        "catering",
+        "makan",
+        "lunch",
+        "dinner"
+      ]
+    },
+    {
+      "id": "langganan-aplikasi",
+      "category": "langganan",
+      "priority": 74,
+      "direction": "debit",
+      "any": [
+        "adobe",
+        "canva",
+        "chatgpt",
+        "openai",
+        "anthropic",
+        "claude",
+        "microsoft 365",
+        "icloud",
+        "google play",
+        "apple.com/bill",
+        "itunes",
+        "google one",
+        "dropbox",
+        "notion"
+      ]
+    },
+    {
+      "id": "laundry",
+      "category": "laundry",
+      "priority": 74,
+      "direction": "debit",
+      "any": [
+        "laundry",
+        "londri",
+        "cuci kiloan",
+        "dry clean"
+      ]
+    },
+    {
+      "id": "sewa",
+      "category": "sewa",
+      "priority": 74,
+      "direction": "debit",
+      "any": [
+        "sewa rumah",
+        "sewa apartemen",
+        "kontrakan",
+        "kos",
+        "service charge apartemen",
+        "iuran pengelolaan"
+      ]
+    },
+    {
+      "id": "streaming",
+      "category": "streaming",
+      "priority": 74,
+      "direction": "debit",
+      "any": [
+        "netflix",
+        "spotify",
+        "disney",
+        "vidio",
+        "wetv",
+        "viu",
+        "youtube premium",
+        "hbo",
+        "prime video",
+        "iqiyi"
+      ]
+    },
+    {
+      "id": "anak",
+      "category": "anak",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "popok",
+        "susu formula",
+        "mainan anak",
+        "baby",
+        "perlengkapan bayi",
+        "mothercare"
+      ]
+    },
+    {
+      "id": "bioskop",
+      "category": "bioskop",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "cgv",
+        "xxi",
+        "cinepolis",
+        "bioskop",
+        "cinema"
+      ]
+    },
+    {
+      "id": "buku",
+      "category": "buku",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "gramedia",
+        "periplus",
+        "buku",
+        "kindle",
+        "e-book"
+      ]
+    },
+    {
+      "id": "game",
+      "category": "game",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "steam",
+        "playstation",
+        "nintendo",
+        "mobile legends",
+        "game"
+      ]
+    },
+    {
+      "id": "konser",
+      "category": "konser",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "tiket konser",
+        "concert",
+        "festival musik"
+      ]
+    },
+    {
+      "id": "olahraga",
+      "category": "olahraga",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "gym",
+        "fitness",
+        "celebrity fitness",
+        "golds gym",
+        "kolam renang",
+        "futsal",
+        "badminton"
+      ]
+    },
+    {
+      "id": "peliharaan",
+      "category": "peliharaan",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "pet shop",
+        "petshop",
+        "makanan kucing",
+        "makanan anjing",
+        "dokter hewan",
+        "vaksin hewan",
+        "grooming hewan"
+      ]
+    },
+    {
+      "id": "perawatan-diri",
+      "category": "perawatan_diri",
+      "priority": 73,
+      "direction": "debit",
+      "any": [
+        "salon",
+        "barbershop",
+        "pangkas rambut",
+        "skincare",
+        "spa",
+        "klinik kecantikan",
+        "erha",
+        "natasha"
+      ]
+    },
+    {
+      "id": "hotel",
+      "category": "hotel",
+      "priority": 72,
+      "direction": "debit",
+      "any": [
+        "hotel",
+        "agoda",
+        "booking.com",
+        "airbnb",
+        "reservasi kamar",
+        "oyo",
+        "reddoorz",
+        "penginapan",
+        "villa"
+      ]
+    },
+    {
+      "id": "pendidikan",
+      "category": "pendidikan",
+      "priority": 72,
+      "direction": "debit",
+      "any": [
+        "spp",
+        "uang sekolah",
+        "sekolah",
+        "smp",
+        "sma",
+        "universitas",
+        "kampus",
+        "bimbel",
+        "ruangguru",
+        "zenius",
+        "udemy",
+        "coursera",
+        "les privat",
+        "daftar ulang"
+      ]
+    },
+    {
+      "id": "pesawat",
+      "category": "pesawat",
+      "priority": 72,
+      "direction": "debit",
+      "any": [
+        "garuda indonesia",
+        "lion air",
+        "citilink",
+        "airasia",
+        "batik air",
+        "super air jet",
+        "tiket pesawat",
+        "boarding pass",
+        "flight"
+      ]
+    },
+    {
+      "id": "hadiah",
+      "category": "hadiah",
+      "priority": 71,
+      "direction": "debit",
+      "any": [
+        "kado",
+        "hadiah",
+        "gift",
+        "parcel",
+        "bingkisan",
+        "angpao"
+      ]
+    },
+    {
+      "id": "kereta-antarkota",
+      "category": "kereta_jauh",
+      "priority": 71,
+      "direction": "debit",
+      "any": [
+        "tiket kereta",
+        "kai access",
+        "access by kai",
+        "whoosh",
+        "kereta cepat"
+      ]
+    },
+    {
+      "id": "bus-travel",
+      "category": "bus_travel",
+      "priority": 70,
+      "direction": "debit",
+      "any": [
+        "bus antarkota",
+        "travel antarkota",
+        "shuttle",
+        "rosalia indah",
+        "sinar jaya",
+        "damri"
+      ]
+    },
+    {
+      "id": "hobi",
+      "category": "hobi",
+      "priority": 70,
+      "direction": "debit",
+      "any": [
+        "alat musik",
+        "sepeda",
+        "kamera",
+        "hobi",
+        "koleksi"
+      ]
+    },
+    {
+      "id": "kesehatan",
+      "category": "kesehatan",
+      "priority": 70,
+      "direction": "debit",
+      "any": [
+        "kesehatan",
+        "bpjs kesehatan"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "category": "belanja",
+      "priority": 70,
+      "direction": "debit",
+      "any": [
+        "tokopedia",
+        "shopee",
+        "lazada",
+        "bukalapak",
+        "blibli",
+        "tiktok shop",
+        "belanja online",
+        "pesanan"
+      ]
+    },
+    {
+      "id": "jasa-rumah",
+      "category": "jasa_rumah",
+      "priority": 69,
+      "direction": "debit",
+      "any": [
+        "service ac",
+        "servis ac",
+        "tukang",
+        "cleaning service",
+        "jasa kebersihan",
+        "sedot wc",
+        "pest control"
+      ]
+    },
+    {
+      "id": "perjalanan-umum",
+      "category": "perjalanan",
+      "priority": 69,
+      "direction": "debit",
+      "any": [
+        "traveloka",
+        "tiket.com",
+        "pegipegi",
+        "trip",
+        "liburan",
+        "wisata"
+      ]
+    },
+    {
+      "id": "rumah",
+      "category": "rumah",
+      "priority": 69,
+      "direction": "debit",
+      "any": [
+        "renovasi",
+        "material bangunan",
+        "depo bangunan",
+        "mitra10",
+        "semen",
+        "keramik",
+        "cat tembok",
+        "home improvement"
+      ]
+    },
+    {
+      "id": "hiburan-umum",
+      "category": "hiburan",
+      "priority": 68,
+      "direction": "debit",
+      "any": [
+        "hiburan",
+        "rekreasi",
+        "wahana"
+      ]
+    }
+  ],
+  "context_overrides": [
+    {
+      "id": "perjalanan-dinas",
+      "any": [
+        "perjalanan dinas",
+        "sppd",
+        "business trip",
+        "biz trip",
+        "dinas luar",
+        "tugas dinas"
+      ],
+      "remap": {
+        "perjalanan": "perjalanan_dinas",
+        "hotel": "hotel_dinas",
+        "pesawat": "pesawat_dinas",
+        "kereta_jauh": "kereta_dinas",
+        "bus_travel": "bus_dinas",
+        "makan": "makan_dinas",
+        "kafe": "makan_dinas",
+        "jajan": "makan_dinas"
+      }
+    }
+  ],
+  "_context_overrides_comment": "Dijalankan setelah kategori terpilih. Bila teks transaksi memuat salah satu kata di 'any', kategori pada 'remap' diganti. Dipakai karena email pemesanan tidak membedakan perjalanan dinas dari liburan, sedangkan penandanya ditulis manual di deskripsi transaksi.",
+  "_moneylover_parent_comment": "Kategori induk di Money Lover. Daftar kategori di aplikasi itu berbeda per dompet, jadi sub-kategori yang tidak ada di satu dompet dikirim ke induknya. Artinya tetap terjaga: pembelian saham jatuh ke Investment, bukan ke Other Expense.",
+  "_fallback_comment": "Merchant yang belum punya aturan masuk ke kategori bawaan Money Lover untuk itu, bukan ke Other Expense. Saldo tetap benar dan transaksinya terlihat jelas di aplikasi untuk dikategorikan ulang, alih-alih tersamar di antara pengeluaran lain."
+}

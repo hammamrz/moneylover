@@ -20,6 +20,17 @@ def load_rules(path: Path = RULES_PATH) -> Dict[str, Any]:
         return json.load(handle)
 
 
+def undecided_categories(rules: Dict[str, Any]) -> set:
+    """Kategori yang berarti 'belum diputuskan', bukan sebuah keputusan.
+
+    Diambil dari ``fallback`` supaya penamaannya tetap satu sumber di
+    rules/categories.json. 'transfer' sengaja tidak ikut: ia memang kategori
+    yang sah, dipilih karena lawan transaksinya terbukti rekening sendiri.
+    """
+    fallback = rules.get('fallback', {})
+    return {fallback[kind] for kind in ('expense', 'income') if fallback.get(kind)}
+
+
 @lru_cache(maxsize=4096)
 def _token_pattern(token: str) -> 're.Pattern[str]':
     """Pola kata utuh untuk satu kata kunci.
@@ -156,6 +167,15 @@ def categorize(transaction: Transaction, rules: Dict[str, Any], config: Dict[str
     if large and transaction.amount >= large:
         transaction.status = STATUS_REVIEW
         transaction.reasons.append(f'nominal >= {large:,.0f}, wajib review manual')
+    elif transaction.category in undecided_categories(rules):
+        # Confidence mengukur keyakinan pada nominal dan tanggal hasil ekstraksi,
+        # bukan pada kategori. Email yang terurai sempurna tapi merchantnya tidak
+        # dikenali tetap bernilai tinggi, dan potongan fallback sebesar 0.2 mendarat
+        # persis di ambang 0.8 sehingga lolos sebagai 'ready'. Tanpa cabang ini,
+        # transaksi yang justru paling butuh keputusan manusia terkirim otomatis
+        # sebagai 'Uncategorized Expense'.
+        transaction.status = STATUS_REVIEW
+        transaction.reasons.append('kategori belum ditentukan, menunggu keputusan manual')
     elif transaction.confidence >= threshold:
         transaction.status = STATUS_READY
     else:

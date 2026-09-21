@@ -28,6 +28,7 @@ Dokumentasi lengkap, cara menyiapkan kredensial, dan daftar perintahnya ada di
 python3 -m automation.cli check                    # verifikasi login, dompet, dan kategori
 python3 -m automation.cli ingest --input email.json
 python3 -m automation.cli review --month 2026-09
+python3 -m automation.cli decide <fingerprint> --category makan
 python3 -m automation.cli push --status ready      # dry-run; tambahkan --live untuk mengirim
 python3 -m unittest discover -s automation/tests -t .
 ```
@@ -38,5 +39,6 @@ python3 -m unittest discover -s automation/tests -t .
   deterministik. Salah kategori mudah dibetulkan; salah satu digit di angka
   rupiah baru terasa berbulan-bulan kemudian.
 - **Ragu berarti ditahan, bukan dikira-kira.** Transaksi yang dompetnya tidak
-  dikenali atau nominalnya besar menunggu keputusan manusia di staging.
+  dikenali, kategorinya belum ditentukan, atau nominalnya besar menunggu
+  keputusan manusia di staging — lalu dilepas dengan `decide` atau `mark`.
 - **Kredensial hanya dari environment variable**, tidak pernah masuk ke repo.

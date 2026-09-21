@@ -60,8 +60,10 @@ def to_review_markdown(transactions: List[Transaction], currency: str = 'Rp') ->
     """Tabel ringkas untuk dibaca manusia di ringkasan Routine."""
     if not transactions:
         return '_Tidak ada transaksi._'
-    lines = ['| Tanggal | Nominal | Merchant | Kategori | Sumber | Status |',
-             '| --- | ---: | --- | --- | --- | --- |']
+    # Fingerprint ikut ditampilkan karena tabel inilah dasar keputusan manual,
+    # dan 'decide', 'tag', serta 'mark' semuanya dialamatkan lewat fingerprint.
+    lines = ['| Tanggal | Nominal | Merchant | Kategori | Sumber | Status | Fingerprint |',
+             '| --- | ---: | --- | --- | --- | --- | --- |']
     for item in transactions:
         sign = '-' if item.kind == 'expense' else ('+' if item.kind == 'income' else '~')
         lines.append(
@@ -70,7 +72,8 @@ def to_review_markdown(transactions: List[Transaction], currency: str = 'Rp') ->
             f"| {(item.merchant or item.email.subject or '-')[:40]} "
             f"| {item.category_label or item.category} "
             f"| {item.bank or item.source_id} "
-            f"| {item.status} |"
+            f"| {item.status} "
+            f"| `{item.fingerprint}` |"
         )
     return '\n'.join(lines)
 

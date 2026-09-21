@@ -130,17 +130,33 @@ python3 -m automation.cli check
 python3 -m automation.cli push --status ready
 python3 -m automation.cli push --status ready --live
 
-# 4. Tandai perjalanan dinas, kategorinya dihitung ulang
+# 4. Putuskan kategori transaksi yang tertahan; statusnya langsung jadi ready
+python3 -m automation.cli decide <fingerprint> --category makan
+
+# 5. Tandai perjalanan dinas, kategorinya dihitung ulang
 python3 -m automation.cli tag <fingerprint> --note "perjalanan dinas"
 
-# 5. Tandai setelah dicatat manual
+# 6. Tandai setelah dicatat manual
 python3 -m automation.cli mark <fingerprint> --status imported
 ```
 
 Hanya transaksi berstatus `ready` yang dikirim otomatis. Transaksi
-`needs_review` — nominal besar, kategori tidak yakin, atau layout email yang
-belum dikenali — tetap menunggu keputusan Anda, lalu bisa dilepas dengan
-`mark <fingerprint> --status ready`.
+`needs_review` — nominal besar, kategori belum ditentukan, atau layout email
+yang belum dikenali — tetap menunggu keputusan Anda.
+
+Alur keputusannya: `review` menampilkan antrean beserta fingerprint tiap
+baris, lalu `decide <fingerprint> --category <kunci>` menetapkan kategorinya
+dan melepasnya sekaligus. `--category` yang tidak dikenal tidak mengubah apa
+pun dan mencetak daftar kategori yang tersedia. Bila kategorinya sudah benar
+dan yang menahan hanya nominal besar, `mark <fingerprint> --status ready`
+sudah cukup.
+
+Merchant yang belum dikenali selalu tertahan, berapa pun confidence-nya.
+Confidence mengukur keyakinan pada nominal dan tanggal, bukan pada kategori:
+email yang terurai sempurna tapi merchantnya asing justru bernilai tinggi,
+sehingga ambang confidence saja tidak pernah menahannya. Kalau satu merchant
+berulang tiap bulan, tambahkan kata kuncinya ke `rules/categories.json` supaya
+tidak perlu diputuskan lagi.
 
 Format input `ingest`:
 

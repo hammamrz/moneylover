@@ -268,6 +268,45 @@ def cmd_tag(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_decide(args: argparse.Namespace) -> int:
+    """Tetapkan kategori sebuah transaksi berdasarkan keputusan manusia.
+
+    ``tag`` hanya bekerja bila ada context_override yang cocok; perintah ini
+    dipakai untuk kasus yang jauh lebih sering: merchant tak dikenal yang
+    kategorinya hanya pemiliknya yang tahu. Status langsung menjadi 'ready'
+    karena keputusannya sudah diambil, bukan lagi ditebak.
+    """
+    category_rules = categorize_module.load_rules()
+    categories = category_rules['categories']
+    if args.category not in categories:
+        print(f"kategori '{args.category}' tidak dikenal.", file=sys.stderr)
+        print('Pilihan yang tersedia:', file=sys.stderr)
+        for key, meta in sorted(categories.items()):
+            print(f"  {key:28} {meta.get('label', key)}", file=sys.stderr)
+        return 1
+
+    meta = categories[args.category]
+
+    def mutate(item):
+        previous = item.category
+        item.category = args.category
+        item.category_label = meta.get('label', args.category)
+        if meta.get('type') == 'transfer':
+            item.kind = 'transfer'
+        item.status = STATUS_READY
+        item.reasons.append(
+            f"kategori ditetapkan manual: '{previous}' -> '{args.category}'"
+        )
+
+    touched = ledger.transform(args.fingerprint, mutate)
+    if not touched:
+        print('tidak ada transaksi dengan fingerprint tersebut', file=sys.stderr)
+        return 1
+    for item in touched:
+        print(f'{item.fingerprint} -> {item.category_label} ({item.category}), status {item.status}')
+    return 0
+
+
 def cmd_mark(args: argparse.Namespace) -> int:
     changed = ledger.update_status(args.fingerprint, args.status)
     print(f'{changed} transaksi diubah menjadi {args.status}')
@@ -315,6 +354,13 @@ def build_parser() -> argparse.ArgumentParser:
     tag.add_argument('--note', required=True,
                      help='contoh: "perjalanan dinas" untuk memindahkannya ke pohon Business trip')
     tag.set_defaults(func=cmd_tag)
+
+    decide = subparsers.add_parser(
+        'decide', help='tetapkan kategori sebuah transaksi yang menunggu keputusan')
+    decide.add_argument('fingerprint', nargs='+')
+    decide.add_argument('--category', required=True,
+                        help='kunci kategori di rules/categories.json, misalnya makan_minum')
+    decide.set_defaults(func=cmd_decide)
 
     check = subparsers.add_parser('check', help='cek token dan pemetaan kategori Money Lover')
     check.set_defaults(func=cmd_check)

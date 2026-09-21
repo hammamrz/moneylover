@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import argparse
+import contextlib
+import io
 import json
 import tempfile
 import unittest
@@ -9,10 +12,11 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from automation import categorize as categorize_module
+from automation import cli
 from automation import extract as extract_module
 from automation import ledger
 from automation.exporters import to_cashflowplus_backup, to_moneylover_csv
-from automation.models import RawEmail, Transaction, STATUS_READY
+from automation.models import RawEmail, Transaction, STATUS_READY, STATUS_REVIEW
 from automation.normalize import ParseError, parse_amount, parse_date
 
 FIXTURES = Path(__file__).parent / 'fixtures_emails.json'
@@ -541,6 +545,109 @@ class TestMoneyLoverLogin(unittest.TestCase):
         client = self.moneylover.MoneyLoverClient(token='AuthJWT abc.def.ghi')
         self.assertEqual(client.token, 'abc.def.ghi')
         self.assertEqual(client.auth_method, 'token')
+
+
+class TestUndecidedCategoriesAreHeld(unittest.TestCase):
+    """Transaksi tanpa kategori tidak boleh terkirim otomatis.
+
+    Confidence mengukur keyakinan pada nominal dan tanggal, bukan pada kategori.
+    Email yang terurai sempurna tapi merchantnya tak dikenal justru bernilai
+    tinggi, sehingga dulu lolos sebagai 'ready' dan mendarat di Money Lover
+    sebagai 'Uncategorized Expense' tanpa pernah dilihat manusia.
+    """
+
+    def setUp(self):
+        self.config = build_config()
+        self.rules = categorize_module.load_rules()
+
+    def build(self, merchant, direction='debit', kind='expense', confidence=1.0):
+        return Transaction(date=datetime(2026, 9, 18, 10, 0, tzinfo=WIB), amount=50000,
+                           direction=direction, kind=kind, merchant=merchant,
+                           bank='BNI', confidence=confidence)
+
+    def test_unknown_merchant_is_held_even_at_full_confidence(self):
+        item = categorize_module.categorize(self.build('MERCHANT TAK DIKENAL XYZ'),
+                                            self.rules, self.config)
+        self.assertEqual(item.category, 'tidak_terkategori')
+        self.assertEqual(item.status, STATUS_REVIEW)
+
+    def test_unknown_income_is_held_too(self):
+        item = categorize_module.categorize(
+            self.build('PENGIRIM TAK DIKENAL', direction='credit', kind='income'),
+            self.rules, self.config)
+        self.assertEqual(item.category, 'tidak_terkategori_masuk')
+        self.assertEqual(item.status, STATUS_REVIEW)
+
+    def test_a_recognised_merchant_still_goes_through(self):
+        # Pengamannya harus menahan yang ragu saja, bukan melumpuhkan pipeline.
+        item = categorize_module.categorize(self.build('Grab A-9RLCNK9GWW4T'),
+                                            self.rules, self.config)
+        self.assertNotIn(item.category, categorize_module.undecided_categories(self.rules))
+        self.assertEqual(item.status, STATUS_READY)
+
+    def test_transfer_is_a_decision_not_an_absence_of_one(self):
+        # 'transfer' juga nilai fallback, tapi dipilih karena lawan transaksinya
+        # terbukti rekening sendiri. Ia tidak boleh ikut tertahan.
+        self.assertNotIn('transfer', categorize_module.undecided_categories(self.rules))
+
+    def test_uncategorized_never_reaches_the_push_plan(self):
+        found = run_pipeline(self.config)
+        undecided = categorize_module.undecided_categories(self.rules)
+        for item in found:
+            if item.category in undecided:
+                with self.subTest(fingerprint=item.fingerprint):
+                    self.assertEqual(item.status, STATUS_REVIEW)
+
+
+class TestDecideCommand(unittest.TestCase):
+    """Keputusan kategori dari manusia harus bisa direkam."""
+
+    def setUp(self):
+        self.rules = categorize_module.load_rules()
+
+    def run_decide(self, item, category):
+        captured = {}
+
+        def fake_transform(fingerprints, mutate, *args, **kwargs):
+            captured['fingerprints'] = list(fingerprints)
+            mutate(item)
+            return [item]
+
+        original = cli.ledger.transform
+        cli.ledger.transform = fake_transform
+        self.addCleanup(setattr, cli.ledger, 'transform', original)
+        args = argparse.Namespace(fingerprint=[item.fingerprint], category=category)
+        # Perintahnya memang mencetak ke stdout/stderr; di sini keluarannya
+        # dibuang supaya laporan tes tetap terbaca.
+        sink = io.StringIO()
+        with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
+            return cli.cmd_decide(args)
+
+    def build(self):
+        return Transaction(date=datetime(2026, 9, 18, 10, 0, tzinfo=WIB), amount=50000,
+                           direction='debit', kind='expense', merchant='WARUNG TAK DIKENAL',
+                           bank='BNI', category='tidak_terkategori', status=STATUS_REVIEW)
+
+    def test_a_decision_sets_the_category_and_releases_the_transaction(self):
+        item = self.build()
+        code = self.run_decide(item, 'makan')
+        self.assertEqual(code, 0)
+        self.assertEqual(item.category, 'makan')
+        self.assertEqual(item.category_label,
+                         self.rules['categories']['makan']['label'])
+        self.assertEqual(item.status, STATUS_READY)
+
+    def test_an_unknown_category_changes_nothing(self):
+        item = self.build()
+        code = self.run_decide(item, 'kategori_karangan')
+        self.assertEqual(code, 1)
+        self.assertEqual(item.category, 'tidak_terkategori')
+        self.assertEqual(item.status, STATUS_REVIEW)
+
+    def test_the_reason_records_that_a_human_decided(self):
+        item = self.build()
+        self.run_decide(item, 'makan')
+        self.assertTrue(any('ditetapkan manual' in reason for reason in item.reasons))
 
 
 if __name__ == '__main__':

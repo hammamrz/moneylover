@@ -51,6 +51,10 @@
       "cashflowplus_book_id": 1
     }
   ],
+  "_ignored_sources_comment": "Label penerbit di rules/sources.json yang sengaja tidak dicatat. Dipakai untuk rekening yang dompet Money Lover-nya dikeluarkan dari total, sehingga transaksinya tidak perlu masuk staging sama sekali. Berbeda dari penerbit yang tidak dikenal: yang tidak dikenal tetap ditahan di antrean review supaya ketahuan, sedangkan yang terdaftar di sini memang sudah diputuskan untuk diabaikan. Kosongkan daftar ini untuk kembali memantau semuanya.",
+  "ignored_sources": [
+    "BNI Kartu Kredit"
+  ],
   "_thresholds_comment": "Transaksi dengan confidence di bawah auto_import_min_confidence tidak pernah dikirim otomatis; selalu masuk antrean review.",
   "thresholds": {
     "auto_import_min_confidence": 0.8,

@@ -117,6 +117,15 @@ def extract(email: RawEmail, rules: Dict[str, Any], config: Dict[str, Any]) -> O
         if token.lower() in subject:
             return None
 
+    # Penerbit yang sengaja tidak dicatat, misalnya kartu kredit yang dompetnya
+    # dikeluarkan dari total. Dibuang di sini, bukan dibiarkan gagal mencari
+    # dompet: transaksi tanpa dompet menumpuk di antrean review selamanya, dan
+    # antrean yang isinya baris yang tidak akan pernah diputuskan membuat baris
+    # yang benar-benar butuh keputusan ikut terabaikan. Berbeda dari penerbit
+    # tak dikenal, yang justru harus tertahan supaya ketahuan.
+    if source and source.get('label') in set(config.get('ignored_sources') or []):
+        return None
+
     hints = email.hints or {}
     reasons: List[str] = []
     confidence = 0.5

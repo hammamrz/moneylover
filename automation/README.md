@@ -241,6 +241,17 @@ dompet sembarangan akan merusak saldo dua rekening sekaligus, jadi transaksinya
 ditahan di staging sampai pemetaannya dilengkapi. `moneylover.default_wallet`
 sengaja dibiarkan kosong untuk alasan yang sama.
 
+Penerbit yang memang **tidak ingin dicatat** ditulis di `ignored_sources`, dan
+emailnya tidak pernah menjadi transaksi. Saat ini isinya `BNI Kartu Kredit`,
+karena dompet `CCBNI` dikeluarkan dari total. Tanpa daftar ini transaksinya
+tetap terurai, gagal mencari dompet, lalu menumpuk di antrean review tanpa
+pernah bisa diputuskan — dan antrean yang penuh baris semacam itu membuat baris
+yang benar-benar butuh keputusan ikut terlewat. Bedanya dengan penerbit tak
+dikenal memang disengaja: yang tak dikenal tetap ditahan supaya ketahuan, yang
+terdaftar di sini sudah diputuskan untuk diabaikan. Aturan penerbitnya di
+`rules/sources.json` tetap utuh, jadi memantaunya lagi cukup dengan
+mengeluarkan labelnya dari daftar ini.
+
 Email dari merchant seperti Tokopedia tidak menyebut rekening mana yang
 terdebit, sedangkan notifikasi bank untuk transaksi yang sama menyebutnya.
 Ketika keduanya terdeteksi sebagai duplikat, informasi rekening diambil dari

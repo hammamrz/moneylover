@@ -245,12 +245,30 @@ class TestRealEmailFormats(unittest.TestCase):
         self.assertNotEqual(item.kind, 'transfer')
         self.assertEqual(item.amount, 100000.0)
 
-    def test_credit_card_is_never_routed_to_the_bank_wallet(self):
-        item = self.parse('bni-cc')
+    def test_credit_card_email_is_not_recorded_at_all(self):
+        # Dompet kartu kredit dikeluarkan dari total, jadi penerbitnya terdaftar
+        # di ignored_sources. Sebelumnya transaksinya terurai lalu tertahan tanpa
+        # dompet, dan menumpuk di antrean review tanpa pernah bisa diputuskan.
+        self.assertIn('BNI Kartu Kredit', self.config['ignored_sources'])
+        self.assertIsNone(self.parse('bni-cc'))
+
+    def test_credit_card_email_is_still_parseable_when_monitored_again(self):
+        # Aturan penerbitnya tetap utuh; yang menghentikannya hanya keputusan di
+        # config, sehingga memantau lagi cukup mengosongkan ignored_sources.
+        config = dict(self.config, ignored_sources=[])
+        item = extract_module.extract(self.emails['bni-cc'], self.source_rules, config)
+        self.assertIsNotNone(item)
         self.assertEqual(item.amount, 64500.0)
         self.assertEqual(item.bank, 'BNI Kartu Kredit')
-        # Dompet kartu kredit dikeluarkan dari total, jadi transaksinya ditahan.
-        self.assertEqual(categorize_module.wallet_for(item, self.config), '')
+
+    def test_an_unknown_issuer_is_held_not_dropped(self):
+        # Pembeda pentingnya: diabaikan hanya yang sudah diputuskan diabaikan.
+        # Penerbit yang belum dikenal harus tetap muncul supaya ketahuan.
+        config = dict(self.config, ignored_sources=['Bank Antah Berantah'])
+        item = Transaction(date=datetime(2026, 9, 18, 10, 0, tzinfo=WIB), amount=50000,
+                           direction='debit', kind='expense', merchant='Warung',
+                           bank='Bank Baru Yang Belum Dikenal')
+        self.assertEqual(categorize_module.wallet_for(item, config), '')
 
     def test_jago_topup_uses_colon_labels_and_counts_as_transfer(self):
         item = self.parse('jago-topup')
